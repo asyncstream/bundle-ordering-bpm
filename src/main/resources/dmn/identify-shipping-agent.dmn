@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1ypgufo" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.0.1">
+  <decision id="identify_shipping_agent" name="Shipping Agent Identification">
+    <extensionElements>
+      <biodi:bounds x="157" y="81" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Country" camunda:inputVariable="shippingAddress.country">
+        <inputExpression id="inputExpression_1" typeRef="string" expressionLanguage="">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0gss98s" label="zipCode" camunda:inputVariable="shippingAddress.zipCode">
+        <inputExpression id="LiteralExpression_0mrz69s" typeRef="string" expressionLanguage="">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Shipping Agent" name="shippingAgent" typeRef="string" />
+      <rule id="DecisionRule_10noow9">
+        <inputEntry id="UnaryTests_1yedhv2">
+          <text>"DEU"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1slewm8">
+          <text>"90402"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1exdc6y">
+          <text>"DHL"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1k50xqm">
+        <inputEntry id="UnaryTests_0iuvevm">
+          <text>"USA"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12gj3su">
+          <text>"94203"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1p9gbn9">
+          <text>"UPS"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

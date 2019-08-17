@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1nkv1pg" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.1">
+  <bpmn:process id="bundle_ordering_process" name="Bundle Ordering Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${bundleProcessStart}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0lf7bjf</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0lf7bjf" sourceRef="StartEvent_1" targetRef="Task_0gwdm75" />
+    <bpmn:endEvent id="EndEvent_0qpfz8b">
+      <bpmn:incoming>SequenceFlow_15yrifu</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0d6g5nd" sourceRef="Task_0gwdm75" targetRef="Task_1u6jt7f" />
+    <bpmn:task id="Task_1u6jt7f" name="Delivery">
+      <bpmn:incoming>SequenceFlow_0d6g5nd</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_15yrifu</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="orderDeliveries" camunda:elementVariable="orderDelivery" />
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_15yrifu" sourceRef="Task_1u6jt7f" targetRef="EndEvent_0qpfz8b" />
+    <bpmn:callActivity id="Task_0gwdm75" name="Single Order Processing" calledElement="singleitem_ordering_process">
+      <bpmn:extensionElements>
+        <camunda:in source="orderItem" target="orderItem" />
+        <camunda:in sourceExpression="${order.shippingAddress}" target="shippingAddress" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0lf7bjf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0d6g5nd</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${order.orderItems}" camunda:elementVariable="orderItem" />
+    </bpmn:callActivity>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="bundle_ordering_process">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="103" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0lf7bjf_di" bpmnElement="SequenceFlow_0lf7bjf">
+        <di:waypoint x="215" y="121" />
+        <di:waypoint x="265" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0qpfz8b_di" bpmnElement="EndEvent_0qpfz8b">
+        <dc:Bounds x="686" y="103" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0d6g5nd_di" bpmnElement="SequenceFlow_0d6g5nd">
+        <di:waypoint x="365" y="121" />
+        <di:waypoint x="482" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_1u6jt7f_di" bpmnElement="Task_1u6jt7f">
+        <dc:Bounds x="482" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_15yrifu_di" bpmnElement="SequenceFlow_15yrifu">
+        <di:waypoint x="582" y="121" />
+        <di:waypoint x="686" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="CallActivity_0oqpa6j_di" bpmnElement="Task_0gwdm75">
+        <dc:Bounds x="265" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
