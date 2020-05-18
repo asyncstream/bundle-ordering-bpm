@@ -8,7 +8,7 @@
     <bpmn:endEvent id="EndEvent_1m0qvww">
       <bpmn:incoming>SequenceFlow_0hn34sl</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_19c4c42" sourceRef="Task_11h0h1x" targetRef="Task_0t5si9d" />
+    <bpmn:sequenceFlow id="SequenceFlow_19c4c42" sourceRef="Task_11h0h1x" targetRef="Task_Packing" />
     <bpmn:sequenceFlow id="SequenceFlow_063of73" sourceRef="Task_0iw1r9z" targetRef="Task_18pim46" />
     <bpmn:businessRuleTask id="Task_0iw1r9z" name="Identify Delivery Agent" camunda:resultVariable="shippingAgents" camunda:decisionRef="identify_shipping_agent">
       <bpmn:incoming>SequenceFlow_1j0c9k4</bpmn:incoming>
@@ -23,8 +23,8 @@
       <bpmn:incoming>SequenceFlow_063of73</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0hn34sl</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1j0c9k4" sourceRef="Task_0t5si9d" targetRef="Task_0iw1r9z" />
-    <bpmn:userTask id="Task_0t5si9d" name="Test">
+    <bpmn:sequenceFlow id="SequenceFlow_1j0c9k4" sourceRef="Task_Packing" targetRef="Task_0iw1r9z" />
+    <bpmn:userTask id="Task_Packing" name="Packing">
       <bpmn:incoming>SequenceFlow_19c4c42</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1j0c9k4</bpmn:outgoing>
     </bpmn:userTask>
@@ -66,7 +66,7 @@
         <di:waypoint x="483" y="121" />
         <di:waypoint x="584" y="121" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0dx20gt_di" bpmnElement="Task_0t5si9d">
+      <bpmndi:BPMNShape id="UserTask_0dx20gt_di" bpmnElement="Task_Packing">
         <dc:Bounds x="383" y="81" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>

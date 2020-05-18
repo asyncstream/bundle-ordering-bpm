@@ -7,18 +7,18 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_0lf7bjf</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0lf7bjf" sourceRef="StartEvent_1" targetRef="Task_0gwdm75" />
-    <bpmn:endEvent id="EndEvent_0qpfz8b">
+    <bpmn:sequenceFlow id="SequenceFlow_0lf7bjf" sourceRef="StartEvent_1" targetRef="CallActivitySingleOrderProcessing" />
+    <bpmn:endEvent id="EndEventDeliveryCompleted">
       <bpmn:incoming>SequenceFlow_15yrifu</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0d6g5nd" sourceRef="Task_0gwdm75" targetRef="Task_1u6jt7f" />
-    <bpmn:task id="Task_1u6jt7f" name="Delivery">
+    <bpmn:sequenceFlow id="SequenceFlow_0d6g5nd" sourceRef="CallActivitySingleOrderProcessing" targetRef="Task_Delivery" />
+    <bpmn:task id="Task_Delivery" name="Delivery">
       <bpmn:incoming>SequenceFlow_0d6g5nd</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_15yrifu</bpmn:outgoing>
       <bpmn:multiInstanceLoopCharacteristics camunda:collection="orderDeliveries" camunda:elementVariable="orderDelivery" />
     </bpmn:task>
-    <bpmn:sequenceFlow id="SequenceFlow_15yrifu" sourceRef="Task_1u6jt7f" targetRef="EndEvent_0qpfz8b" />
-    <bpmn:callActivity id="Task_0gwdm75" name="Single Order Processing" calledElement="singleitem_ordering_process">
+    <bpmn:sequenceFlow id="SequenceFlow_15yrifu" sourceRef="Task_Delivery" targetRef="EndEventDeliveryCompleted" />
+    <bpmn:callActivity id="CallActivitySingleOrderProcessing" name="Single Order Processing" calledElement="singleitem_ordering_process">
       <bpmn:extensionElements>
         <camunda:in source="orderItem" target="orderItem" />
         <camunda:in sourceExpression="${order.shippingAddress}" target="shippingAddress" />
@@ -37,21 +37,21 @@
         <di:waypoint x="215" y="121" />
         <di:waypoint x="265" y="121" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="EndEvent_0qpfz8b_di" bpmnElement="EndEvent_0qpfz8b">
+      <bpmndi:BPMNShape id="EndEvent_0qpfz8b_di" bpmnElement="EndEventDeliveryCompleted">
         <dc:Bounds x="686" y="103" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0d6g5nd_di" bpmnElement="SequenceFlow_0d6g5nd">
         <di:waypoint x="365" y="121" />
         <di:waypoint x="482" y="121" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Task_1u6jt7f_di" bpmnElement="Task_1u6jt7f">
+      <bpmndi:BPMNShape id="Task_1u6jt7f_di" bpmnElement="Task_Delivery">
         <dc:Bounds x="482" y="81" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_15yrifu_di" bpmnElement="SequenceFlow_15yrifu">
         <di:waypoint x="582" y="121" />
         <di:waypoint x="686" y="121" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="CallActivity_0oqpa6j_di" bpmnElement="Task_0gwdm75">
+      <bpmndi:BPMNShape id="CallActivity_0oqpa6j_di" bpmnElement="CallActivitySingleOrderProcessing">
         <dc:Bounds x="265" y="81" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
